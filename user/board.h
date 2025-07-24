@@ -1,9 +1,10 @@
 /**
   ******************************************************************************
+  * @copyright   : Copyright To Hangzhou Dinova EP Technology Co.,Ltd
   * @file        : xxx.h
   * @author      : ZJY
   * @version     : V1.0
-  * @date        : 20xx-xx-xx
+  * @data        : 20xx-xx-xx
   * @brief       : 
   * @attattention: None
   ******************************************************************************
@@ -13,33 +14,23 @@
   *
   ******************************************************************************
   */
-#ifndef __SYS_CONFIG_H__
-#define __SYS_CONFIG_H__
+#ifndef __BOARD_H__
+#define __BOARD_H__
 
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
-
-/* Exported define -----------------------------------------------------------*/
-#define USING_RTOS                      0
-
-#define SYS_CONFIG_NAME_MAX             8
-
-#define LOG_ASSERT_ENABLE               1
-#if (LOG_ASSERT_ENABLE == 0)
-    #define NODEBUG
+#ifdef STM32F429xx
+#include "stm32f4xx_hal.h"
+#elif STM32G474xx
+#include "stm32g4xx_hal.h"
 #endif
 
-/* LOG configure define */
-#define USING_LOG                       1
-#define LOG_OUTPUT_LVL_D
-#define LOG_OUTPUT_LVL                  7
-#define LOG_LINE_BUF_SIZE               128
+#include "sys_def.h"
 
-/* Kernel configure define */
-#define USING_HW_ATOMIC
+/* Exported define -----------------------------------------------------------*/
 
 /* Exported typedef ----------------------------------------------------------*/
 
@@ -48,9 +39,11 @@
 /* Exported variable prototypes ----------------------------------------------*/
 
 /* Exported function prototypes ----------------------------------------------*/
+void board_init(void);
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* __SYS_CONFIG_H__ */
+#endif /* __BOARD_H__ */
+
