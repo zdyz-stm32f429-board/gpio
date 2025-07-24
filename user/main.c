@@ -1,10 +1,18 @@
 /**
- ******************************************************************************
- * @file    main.c
- * @author  xxx
- * @brief   main.c.
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file        : main.c
+  * @author      : ZJY
+  * @version     : V1.0
+  * @date        : 2024-09-26
+  * @brief       : Main program body
+  * @attention   : None
+  ******************************************************************************
+  * @history     :
+  *         V1.0 : 1.xxx
+  *
+  *
+  ******************************************************************************
+  */
 /* Includes ------------------------------------------------------------------*/
 #include "board.h"
 #include "gpio.h"
@@ -14,10 +22,7 @@
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
-#define KEY0_PIN_ID        (115)
-#define KEY1_PIN_ID        (114)
-#define KEY2_PIN_ID        ( 45)
-#define WKUP_PIN_ID        (  0)
+
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
@@ -61,17 +66,12 @@ int main(void)
     pin_id = gpio_get("PB.0");
     
     /* set led gpio mode */
-    gpio_set_mode(16, PIN_OUTPUT_PP, PIN_PULL_UP);
-    gpio_set_mode(17, PIN_OUTPUT_PP, PIN_PULL_UP);
-    gpio_write(16, 1);
-    gpio_write(17, 1);
+    gpio_set_mode(LED_RED_PIN_ID, PIN_OUTPUT_PP, PIN_PULL_UP);
+    gpio_set_mode(LED_BLUE_PIN_ID, PIN_OUTPUT_PP, PIN_PULL_UP);
+    gpio_write(LED_RED_PIN_ID, 1);
+    gpio_write(LED_BLUE_PIN_ID, 1);
     
     /* set key gpio mode */
-    gpio_set_mode(KEY0_PIN_ID, PIN_INPUT, PIN_PULL_UP);
-    gpio_set_mode(KEY1_PIN_ID, PIN_INPUT, PIN_PULL_UP);
-    gpio_set_mode(KEY2_PIN_ID, PIN_INPUT, PIN_PULL_UP);
-    gpio_set_mode(WKUP_PIN_ID, PIN_INPUT, PIN_PULL_DOWN);
-    
     gpio_attach_irq(KEY0_PIN_ID, PIN_IRQ_MODE_FALLING, key0_handle, NULL);
     gpio_irq_enable(KEY0_PIN_ID, 1);
     
@@ -86,11 +86,11 @@ int main(void)
     
     while (1)
     {
-        gpio_write(16, 0);
-        gpio_write(17, 1);
+        gpio_write(LED_RED_PIN_ID, 0);
+        gpio_write(LED_BLUE_PIN_ID, 1);
         HAL_Delay(500);
-        gpio_write(16, 1);
-        gpio_write(17, 0);
+        gpio_write(LED_RED_PIN_ID, 1);
+        gpio_write(LED_BLUE_PIN_ID, 0);
         HAL_Delay(500);
     }
 }

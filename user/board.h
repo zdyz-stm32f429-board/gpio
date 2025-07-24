@@ -31,6 +31,13 @@
 #include "sys_def.h"
 
 /* Exported define -----------------------------------------------------------*/
+#define KEY0_PIN_ID                     (115)
+#define KEY1_PIN_ID                     (114)
+#define KEY2_PIN_ID                     ( 45)
+#define WKUP_PIN_ID                     (  0)
+
+#define LED_RED_PIN_ID                  (16)
+#define LED_BLUE_PIN_ID                 (17)
 
 /* Exported typedef ----------------------------------------------------------*/
 
