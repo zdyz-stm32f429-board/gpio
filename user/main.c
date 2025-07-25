@@ -72,16 +72,16 @@ int main(void)
     gpio_write(LED_BLUE_PIN_ID, 1);
     
     /* set key gpio mode */
-    gpio_attach_irq(KEY0_PIN_ID, PIN_IRQ_MODE_FALLING, key0_handle, NULL);
+    gpio_attach_irq(KEY0_PIN_ID, PIN_EVENT_FALLING_EDGE, key0_handle, NULL);
     gpio_irq_enable(KEY0_PIN_ID, 1);
     
-    gpio_attach_irq(KEY1_PIN_ID, PIN_IRQ_MODE_FALLING, key1_handle, NULL);
+    gpio_attach_irq(KEY1_PIN_ID, PIN_EVENT_FALLING_EDGE, key1_handle, NULL);
     gpio_irq_enable(KEY1_PIN_ID, 1);
     
-    gpio_attach_irq(KEY2_PIN_ID, PIN_IRQ_MODE_FALLING, key2_handle, NULL);
+    gpio_attach_irq(KEY2_PIN_ID, PIN_EVENT_FALLING_EDGE, key2_handle, NULL);
     gpio_irq_enable(KEY2_PIN_ID, 1);
     
-    gpio_attach_irq(WKUP_PIN_ID, PIN_IRQ_MODE_RISING, wkup_key_handle, NULL);
+    gpio_attach_irq(WKUP_PIN_ID, PIN_EVENT_RISING_EDGE, wkup_key_handle, NULL);
     gpio_irq_enable(WKUP_PIN_ID, 1);
     
     while (1)
