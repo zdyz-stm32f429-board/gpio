@@ -36,6 +36,14 @@
 #define KEY2_PIN_ID                     ( 45)
 #define WKUP_PIN_ID                     (  0)
 
+enum key_id {
+    KEY0,
+    KEY1,
+    KEY2,
+    WKUP_KEY,
+    KEY_ID_MAX
+};
+
 #define LED_RED_PIN_ID                  (16)
 #define LED_BLUE_PIN_ID                 (17)
 

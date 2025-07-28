@@ -17,11 +17,38 @@
 /* Includes ------------------------------------------------------------------*/
 #include "board.h"
 #include "stm32_gpio.h"
+
+#include "gpio_key.h"
 /* Private typedef -----------------------------------------------------------*/
+
 /* Private define ------------------------------------------------------------*/
+
 /* Private macro -------------------------------------------------------------*/
+
 /* Private variables ---------------------------------------------------------*/
+gpio_key_cfg_t key_cfg[] = {
+    {
+        .pin_id = KEY0_PIN_ID,
+        .active_low = 1,
+    },
+    {
+        .pin_id = KEY1_PIN_ID,
+        .active_low = 1,
+    },
+    {
+        .pin_id = KEY2_PIN_ID,
+        .active_low = 1,
+    },
+    {
+        .pin_id = WKUP_PIN_ID,
+        .active_low = 0,
+    }
+};
+
+key_t key[KEY_ID_MAX];
+
 /* Exported variables  -------------------------------------------------------*/
+
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 /* Exported functions --------------------------------------------------------*/
@@ -52,6 +79,12 @@ void board_init(void)
     
     /* Initialize all configured peripherals */
     stm32_gpio_init();
+    
+    /* gpio 按键注册 */
+    gpio_key_register(&key[0], KEY0, &key_cfg[0], GPIO_KEY_MODE_POLL);
+    gpio_key_register(&key[1], KEY1, &key_cfg[1], GPIO_KEY_MODE_POLL);
+    gpio_key_register(&key[2], KEY2, &key_cfg[2], GPIO_KEY_MODE_POLL);
+    gpio_key_register(&key[3], WKUP_KEY, &key_cfg[3], GPIO_KEY_MODE_IRQ);
 }
 
 /**
