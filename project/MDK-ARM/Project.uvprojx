@@ -329,7 +329,7 @@
             <uC99>1</uC99>
             <uGnu>1</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
+            <v6Lang>4</v6Lang>
             <v6LangP>5</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -419,6 +419,11 @@
               <FilePath>..\..\devices\gpio.c</FilePath>
             </File>
             <File>
+              <FileName>key_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\devices\key_core.c</FilePath>
+            </File>
+            <File>
               <FileName>gpio_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\devices\gpio_key.c</FilePath>
@@ -473,6 +478,11 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>touch_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\devices\touch_key.c</FilePath>
             </File>
             <File>
               <FileName>led_core.c</FileName>
@@ -585,11 +595,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>key_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\devices\key_core.c</FilePath>
             </File>
             <File>
               <FileName>serial.c</FileName>
@@ -725,6 +730,13 @@
         </Group>
         <Group>
           <GroupName>utilities</GroupName>
+          <Files>
+            <File>
+              <FileName>kfifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\utilities\kfifo.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>documents</GroupName>
