@@ -17,6 +17,10 @@
 #include "board.h"
 #include "gpio.h"
 #include "EventRecorder.h"
+
+#include "stimer.h"
+#include "key.h"
+
 #include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,16 +54,24 @@ int main(void)
     /* set led gpio mode */
     gpio_set_mode(LED_RED_PIN_ID, PIN_OUTPUT_PP, PIN_PULL_UP);
     gpio_set_mode(LED_BLUE_PIN_ID, PIN_OUTPUT_PP, PIN_PULL_UP);
-    gpio_write(LED_RED_PIN_ID, 1);
-    gpio_write(LED_BLUE_PIN_ID, 1);
+    gpio_write(LED_RED_PIN_ID, 0);
+    gpio_write(LED_BLUE_PIN_ID, 0);
     
     while (1)
     {
-        gpio_write(LED_RED_PIN_ID, 0);
-        gpio_write(LED_BLUE_PIN_ID, 1);
-        HAL_Delay(500);
-        gpio_write(LED_RED_PIN_ID, 1);
-        gpio_write(LED_BLUE_PIN_ID, 0);
-        HAL_Delay(500);
+        key_event_msg_t msg;
+        
+        stimer_service();
+        
+        if (key_get_event(&msg))
+        {
+            printf("key_id = %d, key_event = %d\r\n", msg.id, msg.event);
+        }
+//        gpio_write(LED_RED_PIN_ID, 0);
+//        gpio_write(LED_BLUE_PIN_ID, 1);
+//        HAL_Delay(500);
+//        gpio_write(LED_RED_PIN_ID, 1);
+//        gpio_write(LED_BLUE_PIN_ID, 0);
+//        HAL_Delay(500);
     }
 }

@@ -18,6 +18,7 @@
 #include "board.h"
 #include "stm32_gpio.h"
 
+#include "stimer.h"
 #include "gpio_key.h"
 /* Private typedef -----------------------------------------------------------*/
 
@@ -80,11 +81,19 @@ void board_init(void)
     /* Initialize all configured peripherals */
     stm32_gpio_init();
     
+    stimer_init(HAL_GetTick);
+    
     /* gpio 按键注册 */
-    gpio_key_register(&key[0], KEY0, &key_cfg[0], GPIO_KEY_MODE_POLL);
-    gpio_key_register(&key[1], KEY1, &key_cfg[1], GPIO_KEY_MODE_POLL);
-    gpio_key_register(&key[2], KEY2, &key_cfg[2], GPIO_KEY_MODE_POLL);
-    gpio_key_register(&key[3], WKUP_KEY, &key_cfg[3], GPIO_KEY_MODE_IRQ);
+    gpio_key_register(&key[0], KEY0, &key_cfg[0]);
+    gpio_key_register(&key[1], KEY1, &key_cfg[1]);
+    gpio_key_register(&key[2], KEY2, &key_cfg[2]);
+    gpio_key_register(&key[3], WKUP_KEY, &key_cfg[3]);
+    
+    key_init();
+    key_start(&key[KEY0]);
+    key_start(&key[KEY1]);
+    key_start(&key[KEY2]);
+    key_start(&key[WKUP_KEY]);
 }
 
 /**
