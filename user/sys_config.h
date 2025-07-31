@@ -23,6 +23,9 @@
 /* Includes ------------------------------------------------------------------*/
 
 /* Exported define -----------------------------------------------------------*/
+/* 使用的芯片 */
+#define SOC_SERIES_STM32F4
+
 #define USING_RTOS                      0
 
 #define SYS_CONFIG_NAME_MAX             8

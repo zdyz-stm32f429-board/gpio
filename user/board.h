@@ -22,12 +22,6 @@
 #endif /* __cplusplus */
 
 /* Includes ------------------------------------------------------------------*/
-#ifdef STM32F429xx
-#include "stm32f4xx_hal.h"
-#elif STM32G474xx
-#include "stm32g4xx_hal.h"
-#endif
-
 #include "sys_def.h"
 
 /* Exported define -----------------------------------------------------------*/
