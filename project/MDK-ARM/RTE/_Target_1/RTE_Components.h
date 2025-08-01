@@ -9,15 +9,12 @@
 #ifndef RTE_COMPONENTS_H
 #define RTE_COMPONENTS_H
 
-/* ARM::CMSIS-Compiler:STDERR:Event Recorder@1.1.0 */
+/* ARM::CMSIS-Compiler:STDERR:Custom@1.1.0 */
 #define RTE_CMSIS_Compiler_STDERR                /* CMSIS-Compiler STDERR */
-#define RTE_CMSIS_Compiler_STDERR_Event_Recorder /* CMSIS-Compiler STDERR: Event Recorder */
-/* ARM::CMSIS-Compiler:STDOUT:Event Recorder@1.1.0 */
+#define RTE_CMSIS_Compiler_STDERR_Custom         /* CMSIS-Compiler STDERR: Custom */
+/* ARM::CMSIS-Compiler:STDOUT:Custom@1.1.0 */
 #define RTE_CMSIS_Compiler_STDOUT                /* CMSIS-Compiler STDOUT */
-#define RTE_CMSIS_Compiler_STDOUT_Event_Recorder /* CMSIS-Compiler STDOUT: Event Recorder */
-/* ARM::CMSIS-View:Event Recorder&DAP@1.6.0 */
-#define RTE_CMSIS_View_EventRecorder
-#define RTE_CMSIS_View_EventRecorder_DAP
+#define RTE_CMSIS_Compiler_STDOUT_Custom         /* CMSIS-Compiler STDOUT: Custom */
 
 
 #endif /* RTE_COMPONENTS_H */

@@ -16,7 +16,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "board.h"
 #include "gpio.h"
-#include "EventRecorder.h"
 
 #include "stimer.h"
 #include "key.h"
@@ -32,7 +31,11 @@
 #endif
 
 #include <stdio.h>
+#include <assert.h>
 
+#define  LOG_TAG             "main"
+#define  LOG_LVL             7
+#include "log.h"
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
@@ -55,9 +58,7 @@ int main(void)
 { 
     board_init();
     
-    EventRecorderInitialize(EventRecordAll, 1);
-    EventRecorderStart();
-    HAL_Delay(500); // 等待系统稳定
+    SEGGER_RTT_Init();
     
     pin_id = gpio_get("PB.0");
     
@@ -75,13 +76,7 @@ int main(void)
         
         if (key_get_event(&msg))
         {
-            printf("key_id = %d, key_event = %d\r\n", msg.id, msg.event);
+            LOG_I("key_id = %d, key_event = %d\r\n", msg.id, msg.event);
         }
-//        gpio_write(LED_RED_PIN_ID, 0);
-//        gpio_write(LED_BLUE_PIN_ID, 1);
-//        HAL_Delay(500);
-//        gpio_write(LED_RED_PIN_ID, 1);
-//        gpio_write(LED_BLUE_PIN_ID, 0);
-//        HAL_Delay(500);
     }
 }

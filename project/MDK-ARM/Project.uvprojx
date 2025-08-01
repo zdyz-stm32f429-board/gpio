@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,CMSIS_device_header=\"stm32f4xx.h\"</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\user;..\..\utilities;..\..\utilities\math;..\..\drivers\stm32f4xx-hal-driver\Inc;..\..\drivers\stm32f4xx-hal-driver\Inc\Legacy;..\..\drivers\bsp\inc;..\..\devices;..\..\drivers\cmsis-device-f4\Include;..\..\drivers\bsp\stm32</IncludePath>
+              <IncludePath>..\..\user;..\..\utilities;..\..\utilities\math;..\..\drivers\stm32f4xx-hal-driver\Inc;..\..\drivers\stm32f4xx-hal-driver\Inc\Legacy;..\..\drivers\bsp\inc;..\..\devices;..\..\drivers\cmsis-device-f4\Include;..\..\drivers\bsp\stm32;..\..\utilities\log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -406,6 +406,13 @@
         </Group>
         <Group>
           <GroupName>middlewares</GroupName>
+          <Files>
+            <File>
+              <FileName>stderr_user.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\middlewares\retarget_io\stderr_user.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>components</GroupName>
@@ -601,16 +608,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\devices\serial.c</FilePath>
             </File>
+            <File>
+              <FileName>pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\devices\pwm.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>drivers/bsp</GroupName>
           <Files>
-            <File>
-              <FileName>stm32_clk.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\drivers\bsp\stm32\stm32_clk.c</FilePath>
-            </File>
             <File>
               <FileName>stm32_gpio.c</FileName>
               <FileType>1</FileType>
@@ -625,6 +632,11 @@
               <FileName>stm32_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\drivers\bsp\stm32\stm32_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\drivers\bsp\stm32\stm32_pwm.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -746,6 +758,21 @@
               <FileType>1</FileType>
               <FilePath>..\..\utilities\stimer.c</FilePath>
             </File>
+            <File>
+              <FileName>log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\utilities\log\log.c</FilePath>
+            </File>
+            <File>
+              <FileName>SEGGER_RTT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\utilities\log\SEGGER_RTT.c</FilePath>
+            </File>
+            <File>
+              <FileName>SEGGER_RTT_ASM_ARMv7M.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\utilities\log\SEGGER_RTT_ASM_ARMv7M.S</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -756,9 +783,6 @@
         </Group>
         <Group>
           <GroupName>::CMSIS-Compiler</GroupName>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS-View</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -786,20 +810,14 @@
           <targetInfo name="Target 1"/>
         </targetInfos>
       </component>
-      <component Capiversion="1.1.0" Cclass="CMSIS-Compiler" Cgroup="STDERR" Csub="Event Recorder" Cvendor="ARM" Cversion="1.1.0" condition="CORE EVR">
+      <component Capiversion="1.1.0" Cclass="CMSIS-Compiler" Cgroup="STDERR" Csub="Custom" Cvendor="ARM" Cversion="1.1.0" condition="CORE" custom="1">
         <package name="CMSIS-Compiler" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="Target 1"/>
         </targetInfos>
       </component>
-      <component Capiversion="1.1.0" Cclass="CMSIS-Compiler" Cgroup="STDOUT" Csub="Event Recorder" Cvendor="ARM" Cversion="1.1.0" condition="CORE EVR">
+      <component Capiversion="1.1.0" Cclass="CMSIS-Compiler" Cgroup="STDOUT" Csub="Custom" Cvendor="ARM" Cversion="1.1.0" condition="CORE" custom="1">
         <package name="CMSIS-Compiler" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="2.1.0"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="CMSIS-View" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="ARM" Cversion="1.6.0" condition="EventRecorder">
-        <package name="CMSIS-View" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="1.2.0"/>
         <targetInfos>
           <targetInfo name="Target 1"/>
         </targetInfos>
@@ -813,12 +831,10 @@
     </components>
     <files>
       <file attr="config" category="header" name="EventRecorder\Config\EventRecorderConf.h" version="1.1.0">
-        <instance index="0">RTE\CMSIS-View\EventRecorderConf.h</instance>
+        <instance index="0" removed="1">RTE\CMSIS-View\EventRecorderConf.h</instance>
         <component Cclass="CMSIS-View" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="ARM" Cversion="1.6.0" condition="EventRecorder"/>
         <package name="CMSIS-View" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="1.2.0"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
     </files>
   </RTE>
