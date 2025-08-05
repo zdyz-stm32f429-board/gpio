@@ -20,6 +20,8 @@
 
 #include "stimer.h"
 #include "gpio_key.h"
+#include "SEGGER_RTT.h"
+#include "log.h"
 
 #if defined(SOC_SERIES_STM32F1)
     #include "stm32f1xx.h"
@@ -63,6 +65,7 @@ key_t key[KEY_ID_MAX];
 /* Private function prototypes -----------------------------------------------*/
 static void Error_Handler(void);
 static void SystemClock_Config(void);
+static void rtt_output_handler(const char *msg, size_t len);
 
 /* Exported functions --------------------------------------------------------*/
 /**
@@ -81,6 +84,10 @@ void board_init(void)
     
     /* Initialize all configured peripherals */
     stm32_gpio_init();
+    
+    SEGGER_RTT_Init();
+    log_register_handler("rtt", rtt_output_handler);
+    log_enable_handler("rtt");
     
     stimer_init(HAL_GetTick);
     
@@ -176,6 +183,14 @@ void Error_Handler(void)
     {
         
     }
+}
+
+/**
+ * RTT输出处理器
+ */
+static void rtt_output_handler(const char *msg, size_t len)
+{
+    SEGGER_RTT_ASM_WriteSkipNoLock(0, msg, len);
 }
 /* Private functions ---------------------------------------------------------*/
 

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file        : xxx.h
+  * @file        : sysconfig.h
   * @author      : ZJY
   * @version     : V1.0
   * @date        : 20xx-xx-xx
   * @brief       : 
-  * @attattention: None
+  * @attention   : None
   ******************************************************************************
   * @history     :
   *         V1.0 : 1.xxx
@@ -30,16 +30,12 @@
 
 #define SYS_CONFIG_NAME_MAX             8
 
-#define LOG_ASSERT_ENABLE               1
-#if (LOG_ASSERT_ENABLE == 0)
-    #define NODEBUG
-#endif
-
 /* LOG configure define */
 #define USING_LOG                       1
-#define LOG_OUTPUT_LVL_D
-#define LOG_OUTPUT_LVL                  7
-#define LOG_LINE_BUF_SIZE               128
+#define LOG_GLOBAL_LVL                  4
+#define LOG_USING_TIMESTAMP             1
+#define LOG_ASSERT_ENABLE               1
+#define LOG_BUF_SIZE                    (1024)
 
 /* Kernel configure define */
 #define USING_HW_ATOMIC

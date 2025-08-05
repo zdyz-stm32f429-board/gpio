@@ -34,7 +34,7 @@
 #include <assert.h>
 
 #define  LOG_TAG             "main"
-#define  LOG_LVL             7
+#define  LOG_LVL             4
 #include "log.h"
 /* Private typedef -----------------------------------------------------------*/
 
@@ -58,8 +58,6 @@ int main(void)
 { 
     board_init();
     
-    SEGGER_RTT_Init();
-    
     pin_id = gpio_get("PB.0");
     
     /* set led gpio mode */
@@ -67,6 +65,10 @@ int main(void)
     gpio_set_mode(LED_BLUE_PIN_ID, PIN_OUTPUT_PP, PIN_PULL_UP);
     gpio_write(LED_RED_PIN_ID, 0);
     gpio_write(LED_BLUE_PIN_ID, 0);
+    
+    LOG_D("Init success!\r\n");
+    LOG_W("LOG_LVL_WARNING success!\r\n");
+    LOG_E("LOG_LVL_ERROR success!\r\n");
     
     while (1)
     {
@@ -76,7 +78,7 @@ int main(void)
         
         if (key_get_event(&msg))
         {
-            LOG_I("key_id = %d, key_event = %d\r\n", msg.id, msg.event);
+            LOG_D("key_id = %d, key_event = %d\r\n", msg.id, msg.event);
         }
     }
 }
