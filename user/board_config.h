@@ -1,20 +1,18 @@
 /**
   ******************************************************************************
-  * @file        : sysconfig.h
+  * @file        : board_config.h
   * @author      : ZJY
   * @version     : V1.0
-  * @date        : 20xx-xx-xx
+  * @date        : 2025-08-01
   * @brief       : 
   * @attention   : None
   ******************************************************************************
   * @history     :
   *         V1.0 : 1.xxx
-  *
-  *
   ******************************************************************************
   */
-#ifndef __SYS_CONFIG_H__
-#define __SYS_CONFIG_H__
+#ifndef __BOARD_CONFIG_H__
+#define __BOARD_CONFIG_H__
 
 #ifdef __cplusplus
  extern "C" {
@@ -23,22 +21,8 @@
 /* Includes ------------------------------------------------------------------*/
 
 /* Exported define -----------------------------------------------------------*/
-/* 使用的芯片 */
-#define SOC_SERIES_STM32F4
-
-#define USING_RTOS                      0
-
-#define SYS_CONFIG_NAME_MAX             8
-
-/* LOG configure define */
-#define USING_LOG                       1
-#define LOG_GLOBAL_LVL                  4
-#define LOG_USING_TIMESTAMP             1
-#define LOG_ASSERT_ENABLE               1
-#define LOG_BUF_SIZE                    (256)
-
-/* Kernel configure define */
-#define USING_HW_ATOMIC
+#define STM32_FLASH_START_ADDR              (0x08040000)
+#define STM32_FLASH_END_ADDR                (0x080FFFFF)
 
 /* Exported typedef ----------------------------------------------------------*/
 
@@ -52,4 +36,5 @@
 }
 #endif /* __cplusplus */
 
-#endif /* __SYS_CONFIG_H__ */
+#endif /* __BOARD_CONFIG_H__ */
+

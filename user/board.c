@@ -86,6 +86,7 @@ void board_init(void)
     stm32_gpio_init();
     
     SEGGER_RTT_Init();
+    SEGGER_RTT_ConfigUpBuffer(0, "RTTUP", NULL, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
     log_register_handler("rtt", rtt_output_handler);
     log_enable_handler("rtt");
     
@@ -190,7 +191,7 @@ void Error_Handler(void)
  */
 static void rtt_output_handler(const char *msg, size_t len)
 {
-    SEGGER_RTT_ASM_WriteSkipNoLock(0, msg, len);
+    SEGGER_RTT_Write(0, msg, len);
 }
 /* Private functions ---------------------------------------------------------*/
 

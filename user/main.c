@@ -36,6 +36,10 @@
 #define  LOG_TAG             "main"
 #define  LOG_LVL             4
 #include "log.h"
+
+#include "stm32_flash.h"
+#include "mtd_core.h"
+#include <string.h>
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
@@ -44,6 +48,10 @@
 
 /* Private variables ---------------------------------------------------------*/
 size_t pin_id = 0;
+
+uint8_t r_buf[16];
+uint8_t w_buf[16] = "hello nihao!";
+uint8_t w1_buf[16] = "shabi wanyi!";
 /* Private function prototypes -----------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
@@ -55,7 +63,7 @@ size_t pin_id = 0;
  * @retval None
  */
 int main(void)
-{ 
+{   
     board_init();
     
     pin_id = gpio_get("PB.0");
@@ -69,6 +77,19 @@ int main(void)
     LOG_D("Init success!\r\n");
     LOG_W("LOG_LVL_WARNING success!\r\n");
     LOG_E("LOG_LVL_ERROR success!\r\n");
+    
+    mtd_read(&stm32_flash_info, 0, 16, r_buf);
+    LOG_D("r_buf = %s\r\n", r_buf);
+    
+    mtd_write(&stm32_flash_info, 0, 16, w1_buf);
+    mtd_read(&stm32_flash_info, 0, 16, r_buf);
+    LOG_D("r_buf = %s\r\n", r_buf);
+    
+    mtd_erase(&stm32_flash_info, 0, 16, NULL);
+    mtd_write(&stm32_flash_info, 0, 16, w_buf);
+    memset(r_buf, 0x00, 16);
+    mtd_read(&stm32_flash_info, 0, 16, r_buf);
+    LOG_D("r_buf = %s\r\n", r_buf);
     
     while (1)
     {
